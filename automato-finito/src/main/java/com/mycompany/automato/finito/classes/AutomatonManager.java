@@ -1,15 +1,16 @@
 package com.mycompany.automato.finito.classes;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AutomatonManager {
     
     char exercise;
     String description;
     ArrayList<TransitionState> transitionalState;
-    ArrayList<Integer> finalState;
+    List<Integer> finalState;
     
-    public AutomatonManager(char exercise, String description, ArrayList<TransitionState> transitionalState, ArrayList<Integer> finalState) {
+    public AutomatonManager(char exercise, String description, ArrayList<TransitionState> transitionalState, List<Integer> finalState) {
         this.exercise = exercise;
         this.description = description;
         this.transitionalState = transitionalState;
@@ -28,7 +29,7 @@ public class AutomatonManager {
         return transitionalState;
     }
 
-    public ArrayList<Integer> getFinalState() {
+    public List<Integer> getFinalState() {
         return finalState;
     }
     
@@ -43,7 +44,7 @@ public class AutomatonManager {
     }
     
     public boolean isFinalState(int currentState) {
-        if (finalState.contains(currentState)) {
+        if (this.finalState.contains(currentState)) {
             return true;
         }
 

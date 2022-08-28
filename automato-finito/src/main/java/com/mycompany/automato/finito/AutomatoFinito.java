@@ -1,9 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
- */
 
 package com.mycompany.automato.finito;
+
+import com.mycompany.automato.finito.screens.MainScreen;
 
 /**
  *
@@ -12,6 +10,8 @@ package com.mycompany.automato.finito;
 public class AutomatoFinito {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        MainScreen screen = new MainScreen();
+        screen.setVisible(true);
+        screen.setLocationRelativeTo(null);
     }
 }
