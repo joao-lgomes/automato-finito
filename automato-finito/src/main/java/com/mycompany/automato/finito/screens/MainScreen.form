@@ -271,7 +271,6 @@
         <Component class="javax.swing.JTextField" name="textFieldDescription">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
-            <Property name="text" type="java.lang.String" value="jTextField2"/>
           </Properties>
         </Component>
       </SubComponents>

@@ -143,7 +143,6 @@ public class MainScreen extends javax.swing.JFrame {
         );
 
         textFieldDescription.setEditable(false);
-        textFieldDescription.setText("jTextField2");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
