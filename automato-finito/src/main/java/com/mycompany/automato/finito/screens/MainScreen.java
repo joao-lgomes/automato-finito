@@ -6,10 +6,12 @@ package com.mycompany.automato.finito.screens;
 
 import com.mycompany.automato.finito.classes.AutomatonManager;
 import com.mycompany.automato.finito.classes.TransitionState;
+import com.mycompany.automato.finito.constants.Automatons;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,9 +23,8 @@ public class MainScreen extends javax.swing.JFrame {
     int indexOfAutomatonSelected;
 
     public MainScreen() {
+        this.automatons = new Automatons().initializeAutomatonConstants();
         initComponents();
-        this.automatons = populateAutomaton();
-        
         comboBoxChooseAutomaton.removeAllItems();
         automatons.forEach((AutomatonManager automaton) -> {
             comboBoxChooseAutomaton.addItem(String.valueOf(automaton.getExercise()));
@@ -31,25 +32,6 @@ public class MainScreen extends javax.swing.JFrame {
         
         this.indexOfAutomatonSelected = 0;
         textFieldDescription.setText(automatons.get(indexOfAutomatonSelected).getDescription());
-    }
-    
-    public ArrayList<AutomatonManager> populateAutomaton(){
-        ArrayList<AutomatonManager> automatons = new ArrayList();
-        ArrayList<TransitionState> states = new ArrayList();
-        List<Character> A = Arrays.asList('a');
-        List<Character> AeB = Arrays.asList('a', 'b');
-        List<Character> B = Arrays.asList('b');
-        
-        states.add(new TransitionState(0, 0, A, 1));
-        states.add(new TransitionState(1, 0, B, 3));
-        states.add(new TransitionState(2, 3, AeB, 3));
-        states.add(new TransitionState(3, 1, A, 1));
-        states.add(new TransitionState(4, 1, B, 2));
-        states.add(new TransitionState(5, 2, A, 1));
-        states.add(new TransitionState(6, 2, B, 2));
-
-        automatons.add(new AutomatonManager('a', "começa com a e termina com b", states, Arrays.asList(2)));
-        return automatons;
     }
     
     /**
@@ -87,6 +69,11 @@ public class MainScreen extends javax.swing.JFrame {
         labelChooseAutomaton.setText("Escolha o Autômato Desejado");
 
         comboBoxChooseAutomaton.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxChooseAutomaton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxChooseAutomatonActionPerformed(evt);
+            }
+        });
 
         labelChooseAutomaton1.setText("Descrição do Autômato");
 
@@ -244,17 +231,15 @@ public class MainScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Este reconhecedor de autômatos foi construído por Gustavo Mamoto Kazioka e João Luiz Gomes");
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void buttonExecuteSentenceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExecuteSentenceActionPerformed
         String sentence = textFieldSentence.getText();
         char[] arraySymbols = sentence.toCharArray();
-        
+        System.out.println(this.indexOfAutomatonSelected);
         ArrayList<Integer> stateSequence = this.automatons.get(this.indexOfAutomatonSelected).readSentence(arraySymbols);
         
-        System.out.println(sentence);
-        System.out.println(stateSequence);
                      
         if(this.automatons.get(this.indexOfAutomatonSelected).isFinalState(stateSequence.get(stateSequence.size()-1))){
             textFieldSentenceAccepted.setText("Sentença Reconhecida");
@@ -287,6 +272,16 @@ public class MainScreen extends javax.swing.JFrame {
     private void textFieldSentenceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldSentenceActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldSentenceActionPerformed
+
+    private void comboBoxChooseAutomatonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxChooseAutomatonActionPerformed
+        if(comboBoxChooseAutomaton.getSelectedItem() != null){
+            this.indexOfAutomatonSelected = comboBoxChooseAutomaton.getSelectedIndex();
+            
+            textFieldDescription.setText(automatons.get(this.indexOfAutomatonSelected).getDescription());
+            
+        }
+        
+    }//GEN-LAST:event_comboBoxChooseAutomatonActionPerformed
 
     /**
      * @param args the command line arguments
