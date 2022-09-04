@@ -54,10 +54,10 @@ public class AutomatonManager {
     public ArrayList<Integer> readSentence(char[] sentence) {
         int currentState = 0;
         ArrayList<Integer> stateSequence = new ArrayList();
-
+        stateSequence.add(currentState);
         for (char symbol: sentence){
-            stateSequence.add(currentState);
             currentState = this.nextState(currentState, symbol);
+            stateSequence.add(currentState);
             if (currentState == -1){
                 return stateSequence;
             }

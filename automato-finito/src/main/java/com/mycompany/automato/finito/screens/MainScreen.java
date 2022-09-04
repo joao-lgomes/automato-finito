@@ -6,6 +6,7 @@ package com.mycompany.automato.finito.screens;
 
 import com.mycompany.automato.finito.classes.AutomatonManager;
 import com.mycompany.automato.finito.classes.TransitionState;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,19 +17,19 @@ import java.util.List;
  */
 public class MainScreen extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MainScreen
-     */
+    ArrayList<AutomatonManager> automatons;
+    int indexOfAutomatonSelected;
+
     public MainScreen() {
         initComponents();
-        ArrayList<AutomatonManager> automatons = populateAutomaton();
+        this.automatons = populateAutomaton();
         
         comboBoxChooseAutomaton.removeAllItems();
         automatons.forEach((AutomatonManager automaton) -> {
             comboBoxChooseAutomaton.addItem(String.valueOf(automaton.getExercise()));
         });
         
-        int indexOfAutomatonSelected = 0;
+        this.indexOfAutomatonSelected = 0;
         textFieldDescription.setText(automatons.get(indexOfAutomatonSelected).getDescription());
     }
     
@@ -73,8 +74,8 @@ public class MainScreen extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         textAreaSequence = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
+        textFieldSentenceAccepted = new javax.swing.JTextField();
+        PannelColorSentence = new javax.swing.JPanel();
         textFieldDescription = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -125,20 +126,19 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel3.setText("Saída:");
 
-        jTextField1.setEditable(false);
-        jTextField1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jTextField1.setText("Sentença Não Reconhecida");
+        textFieldSentenceAccepted.setEditable(false);
+        textFieldSentenceAccepted.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        PannelColorSentence.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout PannelColorSentenceLayout = new javax.swing.GroupLayout(PannelColorSentence);
+        PannelColorSentence.setLayout(PannelColorSentenceLayout);
+        PannelColorSentenceLayout.setHorizontalGroup(
+            PannelColorSentenceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        PannelColorSentenceLayout.setVerticalGroup(
+            PannelColorSentenceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 39, Short.MAX_VALUE)
         );
 
@@ -148,7 +148,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(PannelColorSentence, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,7 +167,7 @@ public class MainScreen extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(textFieldSentenceAccepted, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(labelChooseAutomaton2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(textFieldSentence)
@@ -206,9 +206,9 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textFieldSentenceAccepted, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(PannelColorSentence, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jMenu1.setText("Opções");
@@ -248,11 +248,40 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void buttonExecuteSentenceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExecuteSentenceActionPerformed
-        // TODO add your handling code here:
+        String sentence = textFieldSentence.getText();
+        char[] arraySymbols = sentence.toCharArray();
+        
+        ArrayList<Integer> stateSequence = this.automatons.get(this.indexOfAutomatonSelected).readSentence(arraySymbols);
+        
+        System.out.println(sentence);
+        System.out.println(stateSequence);
+                     
+        if(this.automatons.get(this.indexOfAutomatonSelected).isFinalState(stateSequence.get(stateSequence.size()-1))){
+            textFieldSentenceAccepted.setText("Sentença Reconhecida");
+            PannelColorSentence.setBackground(Color.GREEN);
+        }else{
+            textFieldSentenceAccepted.setText("Sentença não Reconhecida");
+            PannelColorSentence.setBackground(Color.RED);
+        }
+        
+        this.getStateSequenceFormated(stateSequence);
     }//GEN-LAST:event_buttonExecuteSentenceActionPerformed
 
+    private void getStateSequenceFormated(ArrayList<Integer> stateSequence){
+        int currentIndex = 0;
+        String sequenceString = "";
+
+        for(currentIndex = 0; currentIndex < stateSequence.size() - 1; currentIndex++){
+            if(stateSequence.get(currentIndex+1)==-1)
+                sequenceString = sequenceString.concat("SÍMBOLO NÃO RECONHECIDO");
+            else
+                sequenceString = sequenceString.concat(String.format("q(%s) -> q(%s)\n", stateSequence.get(currentIndex), stateSequence.get(currentIndex+1)));
+        }
+        textAreaSequence.setText(sequenceString);
+    }
+    
     private void buttonCleanSentenceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCleanSentenceActionPerformed
-        // TODO add your handling code here:
+        textFieldSentence.setText("");
     }//GEN-LAST:event_buttonCleanSentenceActionPerformed
 
     private void textFieldSentenceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldSentenceActionPerformed
@@ -295,6 +324,7 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel PannelColorSentence;
     private javax.swing.JButton buttonCleanSentence;
     private javax.swing.JButton buttonExecuteSentence;
     private javax.swing.JComboBox<String> comboBoxChooseAutomaton;
@@ -305,14 +335,13 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel labelChooseAutomaton;
     private javax.swing.JLabel labelChooseAutomaton1;
     private javax.swing.JLabel labelChooseAutomaton2;
     private javax.swing.JTextArea textAreaSequence;
     private javax.swing.JTextField textFieldDescription;
     private javax.swing.JTextField textFieldSentence;
+    private javax.swing.JTextField textFieldSentenceAccepted;
     // End of variables declaration//GEN-END:variables
 }
