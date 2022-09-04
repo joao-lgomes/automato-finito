@@ -18,29 +18,29 @@ public class AutomatonManager {
     }
 
     public char getExercise() {
-        return exercise;
+        return this.exercise;
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     public ArrayList<TransitionState> getTransitionalState() {
-        return transitionalState;
+        return this.transitionalState;
     }
 
     public List<Integer> getFinalState() {
-        return finalState;
+        return this.finalState;
     }
     
     public int nextState(int currentState, char symbol) {
-        for (TransitionState element : transitionalState) {
+        for (TransitionState element : this.transitionalState) {
             if (element.currentState == currentState && element.symbols.contains(symbol)) {
                 return element.nextState;
             }
         }
 
-        return 0;
+        return -1;
     }
     
     public boolean isFinalState(int currentState) {
@@ -49,5 +49,20 @@ public class AutomatonManager {
         }
 
         return false;
+    }
+
+    public ArrayList<Integer> readSentence(char[] sentence) {
+        int currentState = 0;
+        ArrayList<Integer> stateSequence = new ArrayList();
+
+        for (char symbol: sentence){
+            stateSequence.add(currentState);
+            currentState = this.nextState(currentState, symbol);
+            if (currentState == -1){
+                return stateSequence;
+            }
+        }
+
+        return stateSequence;
     }
 }
