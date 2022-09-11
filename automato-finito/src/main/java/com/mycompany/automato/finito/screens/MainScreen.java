@@ -27,7 +27,7 @@ public class MainScreen extends javax.swing.JFrame {
         initComponents();
         comboBoxChooseAutomaton.removeAllItems();
         automatons.forEach((AutomatonManager automaton) -> {
-            comboBoxChooseAutomaton.addItem(String.valueOf(automaton.getExercise()));
+            comboBoxChooseAutomaton.addItem("Autômato " + String.valueOf(automaton.getExercise()).toUpperCase());
         });
         
         this.indexOfAutomatonSelected = 0;
@@ -133,7 +133,9 @@ public class MainScreen extends javax.swing.JFrame {
 
         textFieldDescription.setColumns(20);
         textFieldDescription.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        textFieldDescription.setLineWrap(true);
         textFieldDescription.setRows(5);
+        textFieldDescription.setWrapStyleWord(true);
         jScrollPane1.setViewportView(textFieldDescription);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -181,8 +183,8 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(labelChooseAutomaton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(textFieldSentence, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -198,7 +200,7 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textFieldSentenceAccepted, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PannelColorSentence, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
