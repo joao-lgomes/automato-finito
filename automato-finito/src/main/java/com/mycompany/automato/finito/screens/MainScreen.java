@@ -58,7 +58,8 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         textFieldSentenceAccepted = new javax.swing.JTextField();
         PannelColorSentence = new javax.swing.JPanel();
-        textFieldDescription = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        textFieldDescription = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -115,6 +116,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         textFieldSentenceAccepted.setEditable(false);
         textFieldSentenceAccepted.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        textFieldSentenceAccepted.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         PannelColorSentence.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -126,44 +128,46 @@ public class MainScreen extends javax.swing.JFrame {
         );
         PannelColorSentenceLayout.setVerticalGroup(
             PannelColorSentenceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 39, Short.MAX_VALUE)
+            .addGap(0, 36, Short.MAX_VALUE)
         );
 
-        textFieldDescription.setEditable(false);
+        textFieldDescription.setColumns(20);
+        textFieldDescription.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        textFieldDescription.setRows(5);
+        jScrollPane1.setViewportView(textFieldDescription);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PannelColorSentence, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 12, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(labelChooseAutomaton1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(labelChooseAutomaton, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(comboBoxChooseAutomaton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(textFieldDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(textFieldSentenceAccepted, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(labelChooseAutomaton2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(textFieldSentence)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(buttonCleanSentence, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(buttonExecuteSentence, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(labelChooseAutomaton, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(comboBoxChooseAutomaton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(93, 93, 93))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(textFieldSentenceAccepted, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(labelChooseAutomaton2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textFieldSentence)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(buttonCleanSentence, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(buttonExecuteSentence, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2)
+                            .addComponent(labelChooseAutomaton1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1))))
                 .addGap(17, 17, 17))
+            .addComponent(PannelColorSentence, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,11 +180,11 @@ public class MainScreen extends javax.swing.JFrame {
                     .addComponent(labelChooseAutomaton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(labelChooseAutomaton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(textFieldDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(textFieldSentence, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -222,9 +226,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -235,12 +237,11 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void buttonExecuteSentenceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExecuteSentenceActionPerformed
-        String sentence = textFieldSentence.getText();
+        String sentence = textFieldSentence.getText().toLowerCase();
         char[] arraySymbols = sentence.toCharArray();
         System.out.println(this.indexOfAutomatonSelected);
         ArrayList<Integer> stateSequence = this.automatons.get(this.indexOfAutomatonSelected).readSentence(arraySymbols);
-        
-                     
+
         if(this.automatons.get(this.indexOfAutomatonSelected).isFinalState(stateSequence.get(stateSequence.size()-1))){
             textFieldSentenceAccepted.setText("Sentença Reconhecida");
             PannelColorSentence.setBackground(Color.GREEN);
@@ -248,9 +249,26 @@ public class MainScreen extends javax.swing.JFrame {
             textFieldSentenceAccepted.setText("Sentença não Reconhecida");
             PannelColorSentence.setBackground(Color.RED);
         }
-        
+
         this.getStateSequenceFormated(stateSequence);
     }//GEN-LAST:event_buttonExecuteSentenceActionPerformed
+
+    private void buttonCleanSentenceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCleanSentenceActionPerformed
+        textFieldSentence.setText("");
+    }//GEN-LAST:event_buttonCleanSentenceActionPerformed
+
+    private void textFieldSentenceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldSentenceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textFieldSentenceActionPerformed
+
+    private void comboBoxChooseAutomatonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxChooseAutomatonActionPerformed
+        if(comboBoxChooseAutomaton.getSelectedItem() != null){
+            this.indexOfAutomatonSelected = comboBoxChooseAutomaton.getSelectedIndex();
+
+            textFieldDescription.setText(automatons.get(this.indexOfAutomatonSelected).getDescription());
+
+        }
+    }//GEN-LAST:event_comboBoxChooseAutomatonActionPerformed
 
     private void getStateSequenceFormated(ArrayList<Integer> stateSequence){
         int currentIndex = 0;
@@ -265,24 +283,6 @@ public class MainScreen extends javax.swing.JFrame {
         textAreaSequence.setText(sequenceString);
     }
     
-    private void buttonCleanSentenceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCleanSentenceActionPerformed
-        textFieldSentence.setText("");
-    }//GEN-LAST:event_buttonCleanSentenceActionPerformed
-
-    private void textFieldSentenceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldSentenceActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldSentenceActionPerformed
-
-    private void comboBoxChooseAutomatonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxChooseAutomatonActionPerformed
-        if(comboBoxChooseAutomaton.getSelectedItem() != null){
-            this.indexOfAutomatonSelected = comboBoxChooseAutomaton.getSelectedIndex();
-            
-            textFieldDescription.setText(automatons.get(this.indexOfAutomatonSelected).getDescription());
-            
-        }
-        
-    }//GEN-LAST:event_comboBoxChooseAutomatonActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -330,12 +330,13 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelChooseAutomaton;
     private javax.swing.JLabel labelChooseAutomaton1;
     private javax.swing.JLabel labelChooseAutomaton2;
     private javax.swing.JTextArea textAreaSequence;
-    private javax.swing.JTextField textFieldDescription;
+    private javax.swing.JTextArea textFieldDescription;
     private javax.swing.JTextField textFieldSentence;
     private javax.swing.JTextField textFieldSentenceAccepted;
     // End of variables declaration//GEN-END:variables
