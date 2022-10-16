@@ -9,12 +9,14 @@ public class AutomatonManager {
     String description;
     ArrayList<TransitionState> transitionalState;
     List<Integer> finalState;
+    int initialState;
     
-    public AutomatonManager(char exercise, String description, ArrayList<TransitionState> transitionalState, List<Integer> finalState) {
+    public AutomatonManager(char exercise, String description, ArrayList<TransitionState> transitionalState, List<Integer> finalState, int initialState) {
         this.exercise = exercise;
         this.description = description;
         this.transitionalState = transitionalState;
         this.finalState = finalState;
+        this.initialState = initialState;
     }
 
     public char getExercise() {
@@ -52,7 +54,7 @@ public class AutomatonManager {
     }
 
     public ArrayList<Integer> readSentence(char[] sentence) {
-        int currentState = 0;
+        int currentState = this.initialState;
         ArrayList<Integer> stateSequence = new ArrayList();
         stateSequence.add(currentState);
         for (char symbol: sentence){
