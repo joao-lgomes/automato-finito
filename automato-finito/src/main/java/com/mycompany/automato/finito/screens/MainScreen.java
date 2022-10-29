@@ -8,6 +8,7 @@ import com.mycompany.automato.finito.classes.AutomatonManager;
 import com.mycompany.automato.finito.classes.TransitionState;
 import com.mycompany.automato.finito.constants.Automatons;
 import com.mycompany.automato.finito.utils.FileInterpreter;
+import com.mycompany.automato.finito.utils.StringUtils;
 import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
@@ -522,10 +523,26 @@ public class MainScreen extends javax.swing.JFrame {
             }
             textFieldSentenceValid.setForeground(Color.white);
 
+            System.out.println(sequenceStates.toString());
+            this.getSequenceOfStatesOnSentence(sequenceStates, sentenceToBeValidated);
             //this.getStateSequenceFormated(stateSequence);
         }
     }//GEN-LAST:event_buttonExecuteActionPerformed
 
+    private void getSequenceOfStatesOnSentence(ArrayList<Integer> sequenceStates, String sentence){
+        int currentIndex = 0;
+        String sequenceStringFormated = "";
+
+        for(currentIndex = 0; currentIndex < sequenceStates.size(); currentIndex++){
+          
+            if(sequenceStates.get(currentIndex)==-1)
+                sequenceStringFormated = sequenceStringFormated.concat("SÍMBOLO NÃO RECONHECIDO");
+            else
+                sequenceStringFormated = sequenceStringFormated.concat(StringUtils.addSubstringToString(sentence, String.format("q(%s)", sequenceStates.get(currentIndex)), currentIndex));
+        }
+        textAreaSequenceSteps.setText(sequenceStringFormated);
+    }
+    
     private void buttonChooseArchiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonChooseArchiveActionPerformed
         JFileChooser fc = new JFileChooser();
         fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
