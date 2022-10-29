@@ -67,4 +67,11 @@ public class AutomatonManager {
 
         return stateSequence;
     }
+
+    @Override
+    public String toString() {
+        return "AutomatonManager{" + "exercise=" + exercise + ", description=" + description + ", transitionalState=" + transitionalState + ", finalState=" + finalState + ", initialState=" + initialState + '}';
+    }
+    
+    
 }

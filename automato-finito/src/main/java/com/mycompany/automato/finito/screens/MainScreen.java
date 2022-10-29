@@ -27,7 +27,8 @@ public class MainScreen extends javax.swing.JFrame {
 
     ArrayList<AutomatonManager> automatons;
     int indexOfAutomatonSelected;
-
+    AutomatonManager automatonReadFromArchive;
+    
     public MainScreen() {
         this.automatons = new Automatons().initializeAutomatonConstants();
         initComponents();
@@ -253,7 +254,11 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Dialog", 2, 10)); // NOI18N
         jLabel6.setText("Path do arquivo:");
 
+        textFieldArchivePath.setEditable(false);
+
+        buttonChooseArchive.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         buttonChooseArchive.setText("Selecionar Arquivo");
+        buttonChooseArchive.setMargin(new java.awt.Insets(2, 5, 2, 5));
         buttonChooseArchive.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonChooseArchiveActionPerformed(evt);
@@ -278,8 +283,8 @@ public class MainScreen extends javax.swing.JFrame {
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addComponent(textFieldArchivePath)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(buttonChooseArchive, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonChooseArchive, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -290,10 +295,10 @@ public class MainScreen extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textFieldArchivePath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonChooseArchive))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(buttonChooseArchive, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(textFieldArchivePath, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(7, 7, 7)
                 .addComponent(textFieldAuthomatonValid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -424,7 +429,7 @@ public class MainScreen extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Trab2", jPanel2);
@@ -498,11 +503,27 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_comboBoxChooseAutomatonActionPerformed
 
     private void buttonCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCleanActionPerformed
-        // TODO add your handling code here:
+        textFieldValidateSentence.setText("");
     }//GEN-LAST:event_buttonCleanActionPerformed
 
     private void buttonExecuteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExecuteActionPerformed
-        // TODO add your handling code here:
+        if(this.automatonReadFromArchive != null){
+            String sentenceToBeValidated = textFieldValidateSentence.getText().toLowerCase();
+            char[] arraySimbolsOfSentence = sentenceToBeValidated.toCharArray();
+            
+            ArrayList<Integer> sequenceStates = this.automatonReadFromArchive.readSentence(arraySimbolsOfSentence);
+            
+            if(this.automatonReadFromArchive.isFinalState(sequenceStates.get(sequenceStates.size()-1))){
+                textFieldSentenceValid.setText("Sentença Reconhecida");
+                textFieldSentenceValid.setBackground(new Color(0,153,0));
+            }else{
+                textFieldSentenceValid.setText("Sentença não Reconhecida");
+                textFieldSentenceValid.setBackground(new Color(204, 51, 0));
+            }
+            textFieldSentenceValid.setForeground(Color.white);
+
+            //this.getStateSequenceFormated(stateSequence);
+        }
     }//GEN-LAST:event_buttonExecuteActionPerformed
 
     private void buttonChooseArchiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonChooseArchiveActionPerformed
@@ -515,11 +536,11 @@ public class MainScreen extends javax.swing.JFrame {
         if(file == null){
             return;
         }
-        AutomatonManager automaton;
         String archivePath = file.getAbsolutePath();
         textFieldArchivePath.setText(archivePath);
         try {
-            automaton = FileInterpreter.initializeInstances(archivePath);
+            this.automatonReadFromArchive = FileInterpreter.initializeInstances(archivePath);
+            System.out.println(this.automatonReadFromArchive.toString());
         } catch (IOException ex) {
             Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
         }

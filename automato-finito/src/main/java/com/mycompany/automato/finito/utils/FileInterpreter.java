@@ -25,7 +25,7 @@ public class FileInterpreter {
 
         while((line = br.readLine()) != null) {
             if (line.startsWith("I=")) {
-                initialState = (int) line.charAt(line.length() - 1);
+                initialState = Character.getNumericValue(line.charAt(line.length() - 1));
             }
             else if (line.startsWith("F=")) {
                 stringArray = line.substring(2).split(",");
