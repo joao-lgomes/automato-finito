@@ -237,7 +237,7 @@ public class MainScreen extends javax.swing.JFrame {
                         .addGap(35, 35, 35)
                         .addComponent(textFieldSentenceAccepted, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -313,7 +313,7 @@ public class MainScreen extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 436, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addComponent(textFieldArchivePath)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -376,6 +376,11 @@ public class MainScreen extends javax.swing.JFrame {
         textFieldSentenceValid.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         textFieldSentenceValid.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         textFieldSentenceValid.setText("nenhuma sentença executada...");
+        textFieldSentenceValid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textFieldSentenceValidActionPerformed(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Dialog", 2, 10)); // NOI18N
         jLabel9.setText("Sequência de passos");
@@ -572,7 +577,7 @@ public class MainScreen extends javax.swing.JFrame {
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE))
+                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -624,7 +629,7 @@ public class MainScreen extends javax.swing.JFrame {
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 436, Short.MAX_VALUE)
                     .addComponent(textFieldAuthomatonValid2)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                         .addComponent(textFieldArchivePath2)
@@ -701,7 +706,7 @@ public class MainScreen extends javax.swing.JFrame {
                     .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE))
+                    .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -724,7 +729,7 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane2)
+            .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -751,9 +756,7 @@ public class MainScreen extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -831,7 +834,7 @@ public class MainScreen extends javax.swing.JFrame {
         JFileChooser fc = new JFileChooser();
         fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
         fc.showOpenDialog(this);
-
+        
         File file = fc.getSelectedFile();
 
         if(file == null){
@@ -839,6 +842,11 @@ public class MainScreen extends javax.swing.JFrame {
         }
         String archivePath = file.getAbsolutePath();
         textFieldArchivePath.setText(archivePath);
+        textFieldValidateSentence.setText("");
+        jTextPaneSequenceSteps.setText("");
+        textFieldSentenceValid.setText("nenhuma sentença executada...");
+        textFieldSentenceValid.setBackground(Color.WHITE);
+        textFieldSentenceValid.setForeground(Color.BLACK);
         try {
             this.automatonReadFromArchive = FileInterpreter.initializeInstances(archivePath);
             if(this.automatonReadFromArchive.isDeterministicAutomaton()){
@@ -864,6 +872,10 @@ public class MainScreen extends javax.swing.JFrame {
     private void buttonChooseArchive2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonChooseArchive2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonChooseArchive2ActionPerformed
+
+    private void textFieldSentenceValidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldSentenceValidActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textFieldSentenceValidActionPerformed
 
     private void getSequenceOfStatesOnSentence(ArrayList<Integer> sequenceStates, String sentence, boolean isFinalState){
         int currentIndex = 0;

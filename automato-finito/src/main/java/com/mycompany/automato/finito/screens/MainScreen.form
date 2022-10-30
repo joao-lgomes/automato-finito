@@ -45,10 +45,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="jTabbedPane1" min="-2" pref="457" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
+          <Component id="jTabbedPane1" alignment="0" pref="466" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -121,7 +118,7 @@
                           </Group>
                           <Component id="jScrollPane2" min="-2" pref="408" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="19" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -324,7 +321,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jTabbedPane2" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jTabbedPane2" alignment="0" pref="464" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -426,7 +423,7 @@
                                               <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           </Group>
-                                          <Component id="jLabel5" pref="427" max="32767" attributes="0"/>
+                                          <Component id="jLabel5" pref="436" max="32767" attributes="0"/>
                                           <Group type="102" alignment="1" attributes="0">
                                               <Component id="textFieldArchivePath" max="32767" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
@@ -628,6 +625,9 @@
                             <Property name="horizontalAlignment" type="int" value="0"/>
                             <Property name="text" type="java.lang.String" value="nenhuma senten&#xe7;a executada..."/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textFieldSentenceValidActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel9">
                           <Properties>
@@ -670,7 +670,7 @@
                                   <Component id="jLabel10" max="32767" attributes="0"/>
                                   <Component id="jPanel9" max="32767" attributes="0"/>
                                   <Component id="jPanel10" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jLabel13" alignment="0" pref="441" max="32767" attributes="0"/>
+                                  <Component id="jLabel13" alignment="0" pref="450" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -896,7 +896,7 @@
                                   <Component id="jLabel18" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jPanel11" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jPanel12" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jLabel21" alignment="0" pref="441" max="32767" attributes="0"/>
+                                  <Component id="jLabel21" alignment="0" pref="450" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -936,7 +936,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel16" alignment="1" pref="427" max="32767" attributes="0"/>
+                                      <Component id="jLabel16" alignment="1" pref="436" max="32767" attributes="0"/>
                                       <Component id="textFieldAuthomatonValid2" alignment="0" max="32767" attributes="0"/>
                                       <Group type="102" alignment="1" attributes="0">
                                           <Component id="textFieldArchivePath2" max="32767" attributes="0"/>
