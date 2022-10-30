@@ -19,6 +19,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 /**
  *
@@ -85,9 +89,13 @@ public class MainScreen extends javax.swing.JFrame {
         buttonClean = new javax.swing.JButton();
         buttonExecute = new javax.swing.JButton();
         textFieldSentenceValid = new javax.swing.JTextField();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        textAreaSequenceSteps = new javax.swing.JTextArea();
         jLabel9 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTextPaneSequenceSteps = new javax.swing.JTextPane();
+        jTabbedPane2 = new javax.swing.JTabbedPane();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -219,7 +227,7 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(labelChooseAutomaton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -281,7 +289,7 @@ public class MainScreen extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addComponent(textFieldArchivePath)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -301,7 +309,7 @@ public class MainScreen extends javax.swing.JFrame {
                     .addComponent(textFieldArchivePath, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(7, 7, 7)
                 .addComponent(textFieldAuthomatonValid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -312,7 +320,9 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
@@ -343,20 +353,21 @@ public class MainScreen extends javax.swing.JFrame {
         textFieldSentenceValid.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         textFieldSentenceValid.setText("Sentença Não Reconhecida");
 
-        textAreaSequenceSteps.setColumns(20);
-        textAreaSequenceSteps.setRows(5);
-        jScrollPane3.setViewportView(textAreaSequenceSteps);
-
         jLabel9.setFont(new java.awt.Font("Dialog", 2, 10)); // NOI18N
         jLabel9.setText("Sequência de passos");
+
+        jScrollPane4.setViewportView(jTextPaneSequenceSteps);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane4))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel5Layout.createSequentialGroup()
@@ -370,17 +381,14 @@ public class MainScreen extends javax.swing.JFrame {
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(buttonClean, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(buttonExecute, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane3)))
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -399,38 +407,76 @@ public class MainScreen extends javax.swing.JFrame {
                     .addComponent(textFieldSentenceValid, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 453, Short.MAX_VALUE)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 113, Short.MAX_VALUE)
+        );
+
+        jTabbedPane2.addTab("Validador de sentenças", jPanel6);
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 453, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 113, Short.MAX_VALUE)
+        );
+
+        jTabbedPane2.addTab("AFD para GLUD", jPanel7);
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 453, Short.MAX_VALUE)
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 113, Short.MAX_VALUE)
+        );
+
+        jTabbedPane2.addTab("GLUD para AFN", jPanel8);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addComponent(jTabbedPane2)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(17, 17, 17))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addGap(11, 11, 11))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Trab2", jPanel2);
@@ -459,7 +505,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
         );
 
         pack();
@@ -503,18 +549,15 @@ public class MainScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_comboBoxChooseAutomatonActionPerformed
 
-    private void buttonCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCleanActionPerformed
-        textFieldValidateSentence.setText("");
-    }//GEN-LAST:event_buttonCleanActionPerformed
-
     private void buttonExecuteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExecuteActionPerformed
         if(this.automatonReadFromArchive != null){
+            jTextPaneSequenceSteps.setText("");
             String sentenceToBeValidated = textFieldValidateSentence.getText().toLowerCase();
             char[] arraySimbolsOfSentence = sentenceToBeValidated.toCharArray();
-            
+
             ArrayList<Integer> sequenceStates = this.automatonReadFromArchive.readSentence(arraySimbolsOfSentence);
-            
-            if(this.automatonReadFromArchive.isFinalState(sequenceStates.get(sequenceStates.size()-1))){
+            boolean isFinalState = this.automatonReadFromArchive.isFinalState(sequenceStates.get(sequenceStates.size()-1));
+            if(isFinalState){
                 textFieldSentenceValid.setText("Sentença Reconhecida");
                 textFieldSentenceValid.setBackground(new Color(0,153,0));
             }else{
@@ -524,32 +567,22 @@ public class MainScreen extends javax.swing.JFrame {
             textFieldSentenceValid.setForeground(Color.white);
 
             System.out.println(sequenceStates.toString());
-            this.getSequenceOfStatesOnSentence(sequenceStates, sentenceToBeValidated);
+            this.getSequenceOfStatesOnSentence(sequenceStates, sentenceToBeValidated, isFinalState);
             //this.getStateSequenceFormated(stateSequence);
         }
     }//GEN-LAST:event_buttonExecuteActionPerformed
 
-    private void getSequenceOfStatesOnSentence(ArrayList<Integer> sequenceStates, String sentence){
-        int currentIndex = 0;
-        String sequenceStringFormated = "";
+    private void buttonCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCleanActionPerformed
+        textFieldValidateSentence.setText("");
+    }//GEN-LAST:event_buttonCleanActionPerformed
 
-        for(currentIndex = 0; currentIndex < sequenceStates.size(); currentIndex++){
-          
-            if(sequenceStates.get(currentIndex)==-1)
-                sequenceStringFormated = sequenceStringFormated.concat("SÍMBOLO NÃO RECONHECIDO");
-            else
-                sequenceStringFormated = sequenceStringFormated.concat(StringUtils.addSubstringToString(sentence, String.format("q(%s)", sequenceStates.get(currentIndex)), currentIndex));
-        }
-        textAreaSequenceSteps.setText(sequenceStringFormated);
-    }
-    
     private void buttonChooseArchiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonChooseArchiveActionPerformed
         JFileChooser fc = new JFileChooser();
         fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
         fc.showOpenDialog(this);
-        
+
         File file = fc.getSelectedFile();
-        
+
         if(file == null){
             return;
         }
@@ -563,6 +596,86 @@ public class MainScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonChooseArchiveActionPerformed
 
+    private void getSequenceOfStatesOnSentence(ArrayList<Integer> sequenceStates, String sentence, boolean isFinalState){
+        int currentIndex = 0;
+        String sequenceStringFormated = "";
+        StyledDocument doc = jTextPaneSequenceSteps.getStyledDocument();
+        Style style = jTextPaneSequenceSteps.addStyle("", null);
+        
+        //doc.insertString(doc.getLength(), "Game of Thrones ", style);
+        for(currentIndex = 0; currentIndex < sequenceStates.size(); currentIndex++){
+          
+            if(sequenceStates.get(currentIndex)==-1){
+                StyleConstants.setForeground(style, Color.RED);
+                try {
+                    doc.insertString(doc.getLength(), "SÍMBOLO NÃO RECONHECIDO", style);
+                } catch (BadLocationException ex) {
+                    Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+                
+            else{
+                //sequenceStringFormated = sequenceStringFormated.concat(StringUtils.addSubstringToString(sentence, String.format("q(%s)", sequenceStates.get(currentIndex)), currentIndex));
+                this.formatStringSequence(sentence, String.format("q(%s)", sequenceStates.get(currentIndex)), currentIndex, doc, style, isFinalState);
+            }
+                
+                
+            }
+        //jTextPaneSequenceSteps.setText(sequenceStringFormated);
+    }
+    
+    public void formatStringSequence(String str, String state, int position, StyledDocument doc, Style style, boolean isFinalState){
+        //return str.substring(0, position) + subString + str.substring(position) + "\n";
+        //doc.insertString(doc.getLength(), "Game of Thrones ", style);
+               
+        String sequenceAlreadyRead;
+        String currentState;
+        String nextCharRead;
+        String sequenceUnread;
+        String finalMessage = "";
+        
+        
+        sequenceAlreadyRead = str.substring(0, position);
+        currentState = state;
+        if(position < (str.length())){
+            nextCharRead = str.substring(position, position+1);
+            sequenceUnread = (position < (str.length()-1))? str.substring(position+1)+"\n" : "\n";
+        }
+        else{
+            nextCharRead = "";
+            sequenceUnread = "\n";
+            finalMessage = isFinalState? String.format("O estado %s é um estado final", state) : String.format("O estado %s não é um estado final", state);            
+
+        }
+        System.out.println(nextCharRead);
+        System.out.println(sequenceUnread);
+        try {
+            doc.insertString(doc.getLength(), sequenceAlreadyRead, style);
+            StyleConstants.setForeground(style, Color.BLUE);
+            doc.insertString(doc.getLength(), currentState, style);
+            StyleConstants.setForeground(style, Color.RED);
+            doc.insertString(doc.getLength(), nextCharRead, style);
+            StyleConstants.setForeground(style, Color.BLACK);
+            doc.insertString(doc.getLength(), sequenceUnread, style);
+            
+            if(position == (str.length())){
+                if(isFinalState) StyleConstants.setForeground(style, Color.BLUE);
+                else StyleConstants.setForeground(style, Color.RED);
+                doc.insertString(doc.getLength(), finalMessage, style);
+            }
+                
+            
+            
+            
+        } catch (BadLocationException ex) {
+            Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+    }
+    
     private void getStateSequenceFormated(ArrayList<Integer> stateSequence){
         int currentIndex = 0;
         String sequenceString = "";
@@ -636,15 +749,19 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTextPane jTextPaneSequenceSteps;
     private javax.swing.JLabel labelChooseAutomaton;
     private javax.swing.JLabel labelChooseAutomaton1;
     private javax.swing.JLabel labelChooseAutomaton2;
     private javax.swing.JTextArea textAreaSequence;
-    private javax.swing.JTextArea textAreaSequenceSteps;
     private javax.swing.JTextField textFieldArchivePath;
     private javax.swing.JTextField textFieldAuthomatonValid;
     private javax.swing.JTextArea textFieldDescription;
