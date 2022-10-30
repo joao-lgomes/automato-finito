@@ -36,6 +36,9 @@ public class FileInterpreter {
             }
             else {
                 stringArray = line.split(",");
+                if (stringArray.length != 3) {
+                    throw new IOException("Invalid state in file.");
+                }
                 states.add(new TransitionState(
                     Integer.parseInt(stringArray[0]), 
                     stringArray[1].chars().mapToObj(c -> (char) c).collect(Collectors.toList()),
@@ -43,7 +46,7 @@ public class FileInterpreter {
                 );
             }
         }
-        System.out.println("File has been readed.");
+        System.out.println("File readed.");
         return new AutomatonManager('0', "", states, finalStates, initialState);
     }
 }
