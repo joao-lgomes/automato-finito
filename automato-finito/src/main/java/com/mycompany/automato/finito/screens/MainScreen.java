@@ -300,7 +300,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         textFieldAuthomatonValid.setEditable(false);
         textFieldAuthomatonValid.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        textFieldAuthomatonValid.setText("Autômato Finito Determinístico Válido!");
+        textFieldAuthomatonValid.setText("nenhum autômato selecionado...");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -331,9 +331,8 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(buttonChooseArchive, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(textFieldArchivePath, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(7, 7, 7)
-                .addComponent(textFieldAuthomatonValid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addComponent(textFieldAuthomatonValid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -346,8 +345,8 @@ public class MainScreen extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(110, 110, 110))
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
@@ -376,7 +375,7 @@ public class MainScreen extends javax.swing.JFrame {
         textFieldSentenceValid.setEditable(false);
         textFieldSentenceValid.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         textFieldSentenceValid.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        textFieldSentenceValid.setText("Sentença Não Reconhecida");
+        textFieldSentenceValid.setText("nenhuma sentença executada...");
 
         jLabel9.setFont(new java.awt.Font("Dialog", 2, 10)); // NOI18N
         jLabel9.setText("Sequência de passos");
@@ -455,10 +454,10 @@ public class MainScreen extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel4)
                 .addGap(12, 12, 12)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane2.addTab("Validador de sentenças", jPanel6);
@@ -522,7 +521,7 @@ public class MainScreen extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(textFieldAuthomatonValid1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -651,7 +650,7 @@ public class MainScreen extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(textFieldAuthomatonValid2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -729,9 +728,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jTabbedPane2)
-                .addContainerGap())
+            .addComponent(jTabbedPane2)
         );
 
         jTabbedPane1.addTab("Trab2", jPanel2);
@@ -823,7 +820,6 @@ public class MainScreen extends javax.swing.JFrame {
 
             System.out.println(sequenceStates.toString());
             this.getSequenceOfStatesOnSentence(sequenceStates, sentenceToBeValidated, isFinalState);
-            //this.getStateSequenceFormated(stateSequence);
         }
     }//GEN-LAST:event_buttonExecuteActionPerformed
 
@@ -845,10 +841,20 @@ public class MainScreen extends javax.swing.JFrame {
         textFieldArchivePath.setText(archivePath);
         try {
             this.automatonReadFromArchive = FileInterpreter.initializeInstances(archivePath);
-            System.out.println(this.automatonReadFromArchive.toString());
+            if(this.automatonReadFromArchive.isDeterministicAutomaton()){
+                textFieldAuthomatonValid.setText("Autômato finito determinístico válido!");
+                textFieldAuthomatonValid.setBackground(new Color(0,153,0));
+            }
+            else{
+                textFieldAuthomatonValid.setText("Autômato finito determinístico inválido!");
+                textFieldAuthomatonValid.setBackground(new Color(204, 51, 0));
+            }
         } catch (IOException ex) {
+            textFieldAuthomatonValid.setText("Autômato finito determinístico inválido!");
+            textFieldAuthomatonValid.setBackground(Color.RED);
             Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
+        textFieldAuthomatonValid.setForeground(Color.WHITE);
     }//GEN-LAST:event_buttonChooseArchiveActionPerformed
 
     private void buttonChooseArchive1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonChooseArchive1ActionPerformed
