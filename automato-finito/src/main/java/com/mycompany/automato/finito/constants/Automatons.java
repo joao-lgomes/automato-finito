@@ -17,7 +17,7 @@ public final class Automatons {
     public ArrayList<AutomatonManager> initializeAutomatonConstants(){
         ArrayList<AutomatonManager> automatons = new ArrayList();
         ArrayList<TransitionState> states = new ArrayList();
-        states.add(new StackTransitionState(0, 0, 0, 'a', 0));
+        //states.add(new TransitionState(0, 0, 0, 'a', 0));
         
         List<Character> A = Arrays.asList('a');
         List<Character> AeB = Arrays.asList('a', 'b');

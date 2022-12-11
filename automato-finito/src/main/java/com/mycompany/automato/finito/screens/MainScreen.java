@@ -7,6 +7,7 @@ package com.mycompany.automato.finito.screens;
 import com.mycompany.automato.finito.classes.AutomatonManager;
 import com.mycompany.automato.finito.classes.AutomatonStackManager;
 import com.mycompany.automato.finito.classes.TransitionState;
+import com.mycompany.automato.finito.classes.TuringMachine;
 import com.mycompany.automato.finito.constants.Automatons;
 import com.mycompany.automato.finito.utils.FileInterpreter;
 import com.mycompany.automato.finito.utils.StringUtils;
@@ -38,6 +39,7 @@ public class MainScreen extends javax.swing.JFrame {
     int indexOfAutomatonSelected;
     AutomatonManager automatonReadFromArchive;
     AutomatonStackManager stackAutomatonReadFromArchive;
+    TuringMachine turinMachine;
     
     public MainScreen() {
         this.automatons = new Automatons().initializeAutomatonConstants();
@@ -1290,24 +1292,24 @@ public class MainScreen extends javax.swing.JFrame {
         }
         String archivePath = file.getAbsolutePath();
         textFieldArchivePath.setText(archivePath);
-        textFieldValidateSentence1.setText("");
-        jTextPaneSequenceSteps1.setText("");
-        textFieldSentenceValid1.setText("nenhuma sentença executada...");
-        textFieldSentenceValid1.setBackground(Color.WHITE);
-        textFieldSentenceValid1.setForeground(Color.BLACK);
+        textFieldValidateSentence.setText("");
+        jTextPaneSequenceSteps.setText("");
+        textFieldSentenceValid.setText("nenhuma sentença executada...");
+        textFieldSentenceValid.setBackground(Color.WHITE);
+        textFieldSentenceValid.setForeground(Color.BLACK);
         try {
-            this.stackAutomatonReadFromArchive = FileInterpreter.initializeInstancesStack(archivePath);
-            if(this.stackAutomatonReadFromArchive.isDeterministicAutomaton()){
-                textFieldAuthomatonValid3.setText("Autômato finito com pilha válido!");
-                textFieldAuthomatonValid3.setBackground(new Color(0,153,0));
+            this.automatonReadFromArchive = FileInterpreter.initializeInstances(archivePath);
+            if(this.automatonReadFromArchive.isDeterministicAutomaton()){
+                textFieldAuthomatonValid.setText("Autômato finito com pilha válido!");
+                textFieldAuthomatonValid.setBackground(new Color(0,153,0));
             }
             else{
-                textFieldAuthomatonValid3.setText("Autômato finito com pilha inválido!");
-                textFieldAuthomatonValid3.setBackground(new Color(204, 51, 0));
+                textFieldAuthomatonValid.setText("Autômato finito com pilha inválido!");
+                textFieldAuthomatonValid.setBackground(new Color(204, 51, 0));
             }
         } catch (IOException ex) {
-            textFieldAuthomatonValid3.setText("Autômato finito determinístico inválido!");
-            textFieldAuthomatonValid3.setBackground(Color.RED);
+            textFieldAuthomatonValid.setText("Autômato finito determinístico inválido!");
+            textFieldAuthomatonValid.setBackground(Color.RED);
             Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
         textFieldAuthomatonValid.setForeground(Color.WHITE);
@@ -1336,28 +1338,29 @@ public class MainScreen extends javax.swing.JFrame {
             return;
         }
         String archivePath = file.getAbsolutePath();
-        textFieldArchivePath3.setText(archivePath);
-        textFieldValidateSentence.setText("");
-        jTextPaneSequenceSteps.setText("");
-        textFieldSentenceValid.setText("nenhuma sentença executada...");
-        textFieldSentenceValid.setBackground(Color.WHITE);
-        textFieldSentenceValid.setForeground(Color.BLACK);
+        textFieldArchivePath.setText(archivePath);
+        textFieldValidateSentence1.setText("");
+        jTextPaneSequenceSteps1.setText("");
+        textFieldSentenceValid1.setText("nenhuma sentença executada...");
+        textFieldSentenceValid1.setBackground(Color.WHITE);
+        textFieldSentenceValid1.setForeground(Color.BLACK);
         try {
-            this.automatonReadFromArchive = FileInterpreter.initializeInstances(archivePath);
-            if(this.automatonReadFromArchive.isDeterministicAutomaton()){
-                textFieldAuthomatonValid.setText("Autômato finito determinístico válido!");
-                textFieldAuthomatonValid.setBackground(new Color(0,153,0));
-            }
-            else{
-                textFieldAuthomatonValid.setText("Autômato finito determinístico inválido!");
-                textFieldAuthomatonValid.setBackground(new Color(204, 51, 0));
-            }
+            this.stackAutomatonReadFromArchive = FileInterpreter.initializeInstancesStack(archivePath);
+            System.out.println(this.stackAutomatonReadFromArchive);
+            //if(this.stackAutomatonReadFromArchive.isDeterministicAutomaton()){
+                textFieldAuthomatonValid3.setText("Autômato finito com pilha válido!");
+                textFieldAuthomatonValid3.setBackground(new Color(0,153,0));
+            //}
+            /*else{
+                textFieldAuthomatonValid3.setText("Autômato finito com pilha inválido!");
+                textFieldAuthomatonValid3.setBackground(new Color(204, 51, 0));
+            }*/
         } catch (IOException ex) {
-            textFieldAuthomatonValid.setText("Autômato finito determinístico inválido!");
-            textFieldAuthomatonValid.setBackground(Color.RED);
+            textFieldAuthomatonValid3.setText("Autômato finito determinístico inválido!");
+            textFieldAuthomatonValid3.setBackground(Color.RED);
             Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
-        textFieldAuthomatonValid.setForeground(Color.WHITE);
+        textFieldAuthomatonValid3.setForeground(Color.WHITE);
     }//GEN-LAST:event_buttonChooseArchive3ActionPerformed
 
     private void buttonClean1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClean1ActionPerformed
@@ -1394,17 +1397,81 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_textFieldSentenceValid1ActionPerformed
 
     private void buttonChooseArchive4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonChooseArchive4ActionPerformed
-        // TODO add your handling code here:
+        JFileChooser fc = new JFileChooser();
+        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fc.showOpenDialog(this);
+        
+        File file = fc.getSelectedFile();
+
+        if(file == null){
+            return;
+        }
+        String archivePath = file.getAbsolutePath();
+        textFieldArchivePath4.setText(archivePath);
+        textFieldValidateSentence2.setText("");
+        jTextPaneSequenceSteps2.setText("");
+        textFieldSentenceValid2.setText("nenhuma sentença executada...");
+        textFieldSentenceValid2.setBackground(Color.WHITE);
+        textFieldSentenceValid2.setForeground(Color.BLACK);
+        try {
+            this.turinMachine = FileInterpreter.initializeInstancesTuringMachine(archivePath);
+            //if(this.stackAutomatonReadFromArchive.isDeterministicAutomaton()){
+                textFieldAuthomatonValid4.setText("Autômato finito com pilha válido!");
+                textFieldAuthomatonValid4.setBackground(new Color(0,153,0));
+            //}
+            /*else{
+                textFieldAuthomatonValid3.setText("Autômato finito com pilha inválido!");
+                textFieldAuthomatonValid3.setBackground(new Color(204, 51, 0));
+            }*/
+        } catch (IOException ex) {
+            textFieldAuthomatonValid4.setText("Autômato finito determinístico inválido!");
+            textFieldAuthomatonValid4.setBackground(Color.RED);
+            Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        textFieldAuthomatonValid4.setForeground(Color.WHITE);
     }//GEN-LAST:event_buttonChooseArchive4ActionPerformed
 
     private void buttonClean2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClean2ActionPerformed
-        // TODO add your handling code here:
+        textFieldValidateSentence2.setText("");
     }//GEN-LAST:event_buttonClean2ActionPerformed
 
     private void buttonExecute2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExecute2ActionPerformed
-        // TODO add your handling code here:
+        if(this.turinMachine != null){
+            jTextPaneSequenceSteps2.setText("");
+            String sentenceToBeValidated = textFieldValidateSentence2.getText().toLowerCase();
+            char[] arraySimbolsOfSentence = sentenceToBeValidated.toCharArray();
+
+            ArrayList<Integer> sequenceStates = this.turinMachine.readSentence(sentenceToBeValidated);
+            ArrayList<String> stepByStep = this.turinMachine.getStepByStep();
+            
+            //ArrayList<Integer> sequenceStates = this.stackAutomatonReadFromArchive.readSentence(arraySimbolsOfSentence);
+            //ArrayList<String> stackStates = this.stackAutomatonReadFromArchive.getStackSequence();
+            
+            //ArrayList<Integer> sequenceStates = this.stackAutomatonReadFromArchive.readSentence(arraySimbolsOfSentence);
+            boolean isFinalState = this.turinMachine.isFinalState(sequenceStates.get(sequenceStates.size()-1));
+            if(isFinalState){
+                textFieldSentenceValid2.setText("Sentença Reconhecida");
+                textFieldSentenceValid2.setBackground(new Color(0,153,0));
+            }else{
+                textFieldSentenceValid2.setText("Sentença não Reconhecida");
+                textFieldSentenceValid2.setBackground(new Color(204, 51, 0));
+            }
+            textFieldSentenceValid2.setForeground(Color.white);
+
+            System.out.println(sequenceStates.toString());
+            this.printStepByStepTuringMachine(stepByStep);
+        }
     }//GEN-LAST:event_buttonExecute2ActionPerformed
 
+    
+    private void printStepByStepTuringMachine(ArrayList<String> stepByStep){
+        String textString = "";
+        for(String step: stepByStep){
+            textString = textString + step + "\n";
+        }
+        jTextPaneSequenceSteps2.setText(textString);
+    }
+    
     private void textFieldSentenceValid2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldSentenceValid2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldSentenceValid2ActionPerformed
@@ -1454,18 +1521,20 @@ public class MainScreen extends javax.swing.JFrame {
         if(position < (str.length())){
             fita = "Fita = ";
             nextCharRead = str.substring(position, position+1);
-            sequenceUnread = (position < (str.length()-1))? str.substring(position+1)+"\n" : "\n";
+            sequenceUnread = (position < (str.length()-1))? str.substring(position+1) : "";
             
-            pilha = "Pilha = ";
-            stackState = stackSequence.get(position);
+            pilha = "  Pilha = ";
+            stackState = "";
         }
         else{
             fita = pilha = nextCharRead = "";
-            sequenceUnread = "\n";
+            sequenceUnread = "";
             finalMessage = isFinalState? String.format("O estado %s é um estado final", state) : String.format("O estado %s não é um estado final", state);            
 
             stackState = "";
         }
+        
+        stackState = "\n";
         System.out.println(nextCharRead);
         System.out.println(sequenceUnread);
         try {

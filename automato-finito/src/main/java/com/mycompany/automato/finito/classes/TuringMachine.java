@@ -14,7 +14,7 @@ public class TuringMachine {
     ArrayList<TuringTransitionState> transitionalState;
     List<Integer> finalState;
     int initialState;
-    public ArrayList<String> stepByStep;
+    private ArrayList<String> stepByStep;
     
     public TuringMachine(char exercise, String description, ArrayList<TuringTransitionState> transitionalState, List<Integer> finalState, int initialState) {
         this.exercise = exercise;
@@ -147,6 +147,11 @@ public class TuringMachine {
         return true;
     }
 
+    public ArrayList<String> getStepByStep() {
+        return stepByStep;
+    }
+
+    
     @Override
     public String toString() {
         return "AutomatonManager{" + "exercise=" + exercise + ", description=" + description + ", transitionalState=" + transitionalState + ", finalState=" + finalState + ", initialState=" + initialState + '}';

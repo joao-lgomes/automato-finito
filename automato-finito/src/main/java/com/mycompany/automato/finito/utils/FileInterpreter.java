@@ -83,8 +83,8 @@ public class FileInterpreter {
                 states.add(new StackTransitionState(
                     Integer.parseInt(stringArray[0]),
                     stringArray[1].chars().mapToObj(c -> (char) c).collect(Collectors.toList()),
-                    Integer.parseInt(stringArray[2]),
-                    stringArray[3].charAt(0),
+                    stringArray[2].charAt(0),
+                    Integer.parseInt(stringArray[3]),
                     stringArray[4].charAt(0)
                 ));
             }

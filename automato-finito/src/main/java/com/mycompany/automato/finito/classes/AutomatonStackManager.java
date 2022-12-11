@@ -149,8 +149,10 @@ public class AutomatonStackManager {
             newCurrentState = goToState;
         }
         
-        for (int index =0; index<sentence.length; index++){
-            possiblesNextStates = this.nextState(newCurrentState, sentence[index], charStack);
+        for (char sentenceChar: sentence){
+            
+            
+            possiblesNextStates = this.nextState(newCurrentState, sentenceChar, charStack);
             arrayStack.add(charStack.toString());
             
             if (possiblesNextStates == null){
@@ -163,11 +165,6 @@ public class AutomatonStackManager {
                 newCurrentState = possiblesNextStates.get(0);
                 stateSequence.add(newCurrentState);
             }
-            
-            
-            
-            
-            index++;
         }
 
         return stateSequence;
@@ -213,6 +210,6 @@ public class AutomatonStackManager {
     
     @Override
     public String toString() {
-        return "AutomatonManager{" + "exercise=" + exercise + ", description=" + description + ", transitionalState=" + transitionalState + ", finalState=" + finalState + ", initialState=" + initialState + '}';
+        return "AutomatonManager{" + "transitionalState=" + transitionalState.toString() + "exercise=" + exercise + ", description=" + description + ", transitionalState=" + transitionalState + ", finalState=" + finalState + ", initialState=" + initialState + '}';
     }
 }
