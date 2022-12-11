@@ -5,6 +5,7 @@
 package com.mycompany.automato.finito.constants;
 
 import com.mycompany.automato.finito.classes.AutomatonManager;
+import com.mycompany.automato.finito.classes.StackTransitionState;
 import com.mycompany.automato.finito.classes.TransitionState;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +17,7 @@ public final class Automatons {
     public ArrayList<AutomatonManager> initializeAutomatonConstants(){
         ArrayList<AutomatonManager> automatons = new ArrayList();
         ArrayList<TransitionState> states = new ArrayList();
+        states.add(new StackTransitionState(0, 0, 0, 'a', 0));
         
         List<Character> A = Arrays.asList('a');
         List<Character> AeB = Arrays.asList('a', 'b');
@@ -211,6 +213,9 @@ public final class Automatons {
         states.add(new TransitionState(10, Symbols, 2));
         
         automatons.add(new AutomatonManager('j', "É um número inteiro, um número decimal ou um número representado em notação científica", states, Arrays.asList(1, 5, 8, 10), 0));
+        
+        AutomatonManager am = new AutomatonManager('j', "É um número inteiro, um número decimal ou um número representado em notação científica", states, Arrays.asList(1, 5, 8, 10), 0);
+        System.out.print(am.isDeterministicAutomaton());
         
         return automatons;
     }

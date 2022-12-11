@@ -1,6 +1,5 @@
 package com.mycompany.automato.finito.classes;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TransitionState {
