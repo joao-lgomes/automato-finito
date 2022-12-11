@@ -18,6 +18,8 @@ public class AutomatonStackManager {
     int initialState;
     private Stack<Character> stack;
     
+    ArrayList<String> stackSequence;
+    
     public AutomatonStackManager(char exercise, String description, ArrayList<StackTransitionState> transitionalState, List<Integer> finalState, int initialState) {
         this.exercise = exercise;
         this.description = description;
@@ -25,6 +27,7 @@ public class AutomatonStackManager {
         this.finalState = finalState;
         this.initialState = initialState;
         this.stack = new Stack();
+        this.stackSequence = new ArrayList<String>();
     }
 
     public char getExercise() {
@@ -43,13 +46,20 @@ public class AutomatonStackManager {
         return this.finalState;
     }
     
-    public ArrayList<StackTransitionState> nextState(int currentState, char symbol, char peek) {
-        ArrayList<StackTransitionState> possiblesNextStates = new ArrayList();
-        
+    public ArrayList<Integer> nextState(int currentState, char symbol, Stack<Character> charStack) {
+        ArrayList<Integer> possiblesNextStates = new ArrayList<Integer>();
+        char peek = charStack.isEmpty()? ' ' : charStack.peek();
         for (StackTransitionState element : this.transitionalState) {
             if (element.currentState == currentState && (element.symbols.contains(symbol) || element.symbols.contains('?'))) {
-                if(element.unstackSymbol == peek  || element.unstackSymbol == '?')
-                    possiblesNextStates.add(element);
+                if(element.unstackSymbol == peek){
+                    charStack.pop();
+                    if(element.stackSymbol != '?') charStack.push(element.stackSymbol);
+                    possiblesNextStates.add(element.nextState);
+                }
+                else if(element.unstackSymbol == '?'){
+                    if(element.stackSymbol != '?') charStack.push(element.stackSymbol);
+                    possiblesNextStates.add(element.nextState);
+                }
             }
         }
         
@@ -59,7 +69,7 @@ public class AutomatonStackManager {
         return possiblesNextStates;
     }
     
-    public ArrayList<StackTransitionState> nextState(int currentState, char symbol) {
+    /*public ArrayList<StackTransitionState> nextState(int currentState, char symbol) {
         ArrayList<StackTransitionState> possiblesNextStates = new ArrayList();
         
         for (StackTransitionState element : this.transitionalState) {
@@ -72,7 +82,7 @@ public class AutomatonStackManager {
             return null;
         
         return possiblesNextStates;
-    }
+    }*/
     
     
     public boolean isFinalState(int currentState) {
@@ -109,42 +119,53 @@ public class AutomatonStackManager {
 //
 //        return stateSequence;
 //    }
-    // ABC, AUTOMATONSTACKMANAGER.INITIAL, NULL, AUTOMATONSTM.STACK
-    // ABC: A -> ?, $
+ 
     
-    // BC, AUTOMATONSTACKMANAGER.INITIAL, (A -> ?, $), []
-    // [0, ]
-    // CURRENT STATE -> 1
-    public ArrayList<Integer> readSentence(char[] sentence, int currentState, StackTransitionState goToState, Stack<Character> charStack) {
-        ArrayList<StackTransitionState> possiblesNextStates = new ArrayList();
-        ArrayList<Integer> stateSequence = new ArrayList();
-        ArrayList<Integer> a;
+    //ABCDE
+    
+    //DEF
+    
+    //F2
+    //F1
+    
+    public ArrayList<Integer> readSentence(char[] sentence){
+        Stack<Character> charStack = new Stack<Character>();
+        return this.readSentence(sentence, this.initialState, 0, charStack);
+    }
+    
+    public  ArrayList<Integer> readSentence(char[] sentence, int currentState, int goToState, Stack<Character> charStack) {
+        this.stackSequence = new ArrayList<String>();
         
-        if (goToState != null) {
-            stateSequence.add(currentState);
-            currentState = goToState.currentState;
-            if(!charStack.isEmpty())
-                charStack.pop();
-            charStack.push(goToState.stackSymbol);
+        ArrayList<Integer> possiblesNextStates = new ArrayList<Integer>();
+        ArrayList<Integer> stateSequence = new ArrayList();
+        ArrayList<ArrayList<Integer>> a;
+        ArrayList<String> arrayStack = new ArrayList<String>();
+        Map<ArrayList<Integer>, ArrayList<String>> returnMap = new  HashMap<ArrayList<Integer>, ArrayList<String>>();
+        
+        int newCurrentState = currentState;
+        
+        if (goToState != 0) {
+            stateSequence.add(newCurrentState);
+            newCurrentState = goToState;
         }
-
-        int index = 0;
-        for (char symbol: sentence){
-            if(charStack.isEmpty()){
-                possiblesNextStates = this.nextState(currentState, symbol);
-            }
-            else{
-                possiblesNextStates = this.nextState(currentState, symbol, charStack.peek());
-            }
+        
+        for (int index =0; index<sentence.length; index++){
+            possiblesNextStates = this.nextState(newCurrentState, sentence[index], charStack);
+            arrayStack.add(charStack.toString());
             
             if (possiblesNextStates == null){
                 stateSequence.add(-1);
+                
                 return stateSequence;
             }
             
-            for(StackTransitionState state: possiblesNextStates) {
-                a = readSentence(Arrays.copyOfRange(sentence, index, sentence.length), currentState, state, (Stack<Character>) charStack.clone());
+            if(possiblesNextStates.size()==1){
+                newCurrentState = possiblesNextStates.get(0);
+                stateSequence.add(newCurrentState);
             }
+            
+            
+            
             
             index++;
         }
@@ -185,7 +206,11 @@ public class AutomatonStackManager {
         }
         return true;
     }
-            
+
+    public ArrayList<String> getStackSequence() {
+        return stackSequence;
+    }
+    
     @Override
     public String toString() {
         return "AutomatonManager{" + "exercise=" + exercise + ", description=" + description + ", transitionalState=" + transitionalState + ", finalState=" + finalState + ", initialState=" + initialState + '}';
