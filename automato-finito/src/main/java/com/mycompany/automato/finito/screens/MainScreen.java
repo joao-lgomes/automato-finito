@@ -1376,6 +1376,8 @@ public class MainScreen extends javax.swing.JFrame {
             ArrayList<Integer> sequenceStates = this.stackAutomatonReadFromArchive.readSentence(arraySimbolsOfSentence);
             ArrayList<String> stackStates = this.stackAutomatonReadFromArchive.getStackSequence();
             
+            System.out.println("tamanho "+stackStates.size());
+            
             //ArrayList<Integer> sequenceStates = this.stackAutomatonReadFromArchive.readSentence(arraySimbolsOfSentence);
             boolean isFinalState = this.stackAutomatonReadFromArchive.isFinalState(sequenceStates.get(sequenceStates.size()-1));
             if(isFinalState){
@@ -1477,11 +1479,11 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_textFieldSentenceValid2ActionPerformed
 
     private void getSequenceOfStatesOnStackSentence(ArrayList<Integer> sequenceStates, String sentence, boolean isFinalState, ArrayList<String> stackSequence){
+        
         int currentIndex = 0;
         StyledDocument doc = jTextPaneSequenceSteps1.getStyledDocument();
         Style style = jTextPaneSequenceSteps1.addStyle("", null);
         
-        //doc.insertString(doc.getLength(), "Game of Thrones ", style);
         for(currentIndex = 0; currentIndex < sequenceStates.size(); currentIndex++){
           
             if(sequenceStates.get(currentIndex)==-1){
@@ -1504,9 +1506,7 @@ public class MainScreen extends javax.swing.JFrame {
     }
     
     public void formatStringStackSequence(String str, String state, int position, StyledDocument doc, Style style, boolean isFinalState, ArrayList<String> stackSequence){
-        //return str.substring(0, position) + subString + str.substring(position) + "\n";
-        //doc.insertString(doc.getLength(), "Game of Thrones ", style);
-               
+
         String sequenceAlreadyRead;
         String currentState;
         String nextCharRead;
@@ -1522,19 +1522,17 @@ public class MainScreen extends javax.swing.JFrame {
             fita = "Fita = ";
             nextCharRead = str.substring(position, position+1);
             sequenceUnread = (position < (str.length()-1))? str.substring(position+1) : "";
-            
-            pilha = "  Pilha = ";
-            stackState = "";
+                        
         }
         else{
             fita = pilha = nextCharRead = "";
             sequenceUnread = "";
             finalMessage = isFinalState? String.format("O estado %s é um estado final", state) : String.format("O estado %s não é um estado final", state);            
 
-            stackState = "";
         }
         
-        stackState = "\n";
+        pilha = "  Pilha = ";
+        stackState = stackSequence.get(position)+"\n";
         System.out.println(nextCharRead);
         System.out.println(sequenceUnread);
         try {

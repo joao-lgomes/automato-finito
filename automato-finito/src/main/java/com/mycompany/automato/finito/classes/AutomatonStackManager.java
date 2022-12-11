@@ -60,6 +60,10 @@ public class AutomatonStackManager {
                     if(element.stackSymbol != '?') charStack.push(element.stackSymbol);
                     possiblesNextStates.add(element.nextState);
                 }
+                
+                if(element.symbols.contains('?')){
+                    charStack.push('?');
+                }
             }
         }
         
@@ -138,10 +142,7 @@ public class AutomatonStackManager {
         
         ArrayList<Integer> possiblesNextStates = new ArrayList<Integer>();
         ArrayList<Integer> stateSequence = new ArrayList();
-        ArrayList<ArrayList<Integer>> a;
-        ArrayList<String> arrayStack = new ArrayList<String>();
-        Map<ArrayList<Integer>, ArrayList<String>> returnMap = new  HashMap<ArrayList<Integer>, ArrayList<String>>();
-        
+        Stack<Character> charStackClone = new Stack<Character>();
         int newCurrentState = currentState;
         
         if (goToState != 0) {
@@ -149,11 +150,27 @@ public class AutomatonStackManager {
             newCurrentState = goToState;
         }
         
-        for (char sentenceChar: sentence){
+        for (int index = 0; index<sentence.length; index++){
+            int j = 0;
             
+            if(!charStack.isEmpty() && charStack.peek() == '?' && index>0){
+                index--;
+                charStack.pop();
+            }
             
-            possiblesNextStates = this.nextState(newCurrentState, sentenceChar, charStack);
-            arrayStack.add(charStack.toString());
+            if(!charStack.isEmpty() && j!=0){
+                if(charStackClone.peek() == '?') charStackClone.pop();
+                    this.stackSequence.add(charStackClone.toString());
+                }
+            
+            possiblesNextStates = this.nextState(newCurrentState, sentence[index], charStack);
+            charStackClone = (Stack<Character>) charStack.clone();
+            
+            if(!charStack.isEmpty() && j==0){
+                if(charStackClone.peek() == '?') charStackClone.pop();
+                    this.stackSequence.add(charStackClone.toString());
+            }
+            
             
             if (possiblesNextStates == null){
                 stateSequence.add(-1);
@@ -165,8 +182,11 @@ public class AutomatonStackManager {
                 newCurrentState = possiblesNextStates.get(0);
                 stateSequence.add(newCurrentState);
             }
+            
+            j++;
         }
-
+        
+        
         return stateSequence;
     }
     
@@ -205,11 +225,11 @@ public class AutomatonStackManager {
     }
 
     public ArrayList<String> getStackSequence() {
-        return stackSequence;
+        return this.stackSequence;
     }
     
     @Override
     public String toString() {
-        return "AutomatonManager{" + "transitionalState=" + transitionalState.toString() + "exercise=" + exercise + ", description=" + description + ", transitionalState=" + transitionalState + ", finalState=" + finalState + ", initialState=" + initialState + '}';
+        return "AutomatonManager{" + "exercise=" + exercise + ", description=" + description + ", transitionalState=" + transitionalState + ", finalState=" + finalState + ", initialState=" + initialState + '}';
     }
 }
