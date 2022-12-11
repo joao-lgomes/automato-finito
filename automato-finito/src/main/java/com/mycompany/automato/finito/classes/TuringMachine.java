@@ -75,14 +75,20 @@ public class TuringMachine {
         char[] charArray;
         int index = 0;
         stateSequence.add(currentState);
-        while(index >= 0 && index <= sentence.length()) {  
-            this.stepByStep.add(sentence);
+        String b;
+        while(index >= 0 && index <= sentence.length()) {
+            if(index == 0) {
+                this.stepByStep.add(String.format("q(%d)%s", currentState, sentence));
+            }
+            else if(index <= sentence.length()) {
+                this.stepByStep.add(sentence.substring(0, index) + String.format("q(%d)", currentState) + sentence.substring(index, sentence.length()));
+            }
+            
             if(index <= sentence.length() - 1)
                 tts = this.turingState(currentState, sentence.charAt(index));
             else
                 tts = this.turingState(currentState, '?');
             if (tts == null) {
-                System.out.println(stateSequence.toString());
                 return stateSequence;
             }
             
@@ -92,6 +98,10 @@ public class TuringMachine {
                 sentence = String.valueOf(charArray);
                 currentState = tts.nextState;
             }
+            else {
+                currentState = tts.nextState;
+                this.stepByStep.add(sentence.substring(0, index) + String.format("q(%d)", currentState) + sentence.substring(index, sentence.length()));
+            }
 
             stateSequence.add(tts.nextState); 
             if(tts.direction == 'D')
@@ -100,7 +110,6 @@ public class TuringMachine {
                 index--;
         }
         
-        System.out.println(stateSequence.toString());
         return stateSequence;
     }
     
